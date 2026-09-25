@@ -1,0 +1,426 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FAFAF7;
+  --surface: #FFFFFF;
+  --surface-subtle: #F4F4EF;
+  --text-primary: #263A35;
+  --text-secondary: #66716C;
+  --text-muted: #8A938E;
+  --border: #E3E5DF;
+  --border-strong: #D2D6CF;
+  --ocean-deep: #4E635E;
+  --ocean-deep-hover: #40544F;
+  --villa-nova: #E2E0C8;
+  --siren-song: #A6B49E;
+  --big-river: #818C78;
+  --focus-ring: #4E635E;
+  --success: #4E635E;
+  --error: #B42318;
+  --warning: #8A6418;
+
+  --shadow-subtle: 0 1px 2px rgba(20, 30, 26, 0.04);
+  --shadow-floating: 0 8px 30px rgba(20, 30, 26, 0.08);
+}
+
+.dark {
+  --background: #0C100F;
+  --surface: #121715;
+  --surface-subtle: #171D1A;
+  --text-primary: #F3F5F1;
+  --text-secondary: #AAB3AD;
+  --text-muted: #747E78;
+  --border: #28302C;
+  --border-strong: #39433E;
+  --ocean-deep: #8EA8A0;
+  --ocean-deep-hover: #A7BDB5;
+  --villa-nova: #D8D5B8;
+  --siren-song: #A6B49E;
+  --big-river: #919D88;
+  --focus-ring: #8EA8A0;
+  --success: #8EA8A0;
+  --error: #F97066;
+  --warning: #D8B45B;
+
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-floating: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ocean-deep: var(--ocean-deep);
+  --color-ocean-deep-hover: var(--ocean-deep-hover);
+  --color-villa-nova: var(--villa-nova);
+  --color-siren-song: var(--siren-song);
+  --color-big-river: var(--big-river);
+  --color-focus-ring: var(--focus-ring);
+  --color-success: var(--success);
+  --color-error: var(--error);
+  --color-warning: var(--warning);
+
+  --shadow-subtle: var(--shadow-subtle);
+  --shadow-floating: var(--shadow-floating);
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* Eliminate harsh default browser outlines on forms and inputs */
+input,
+textarea,
+select,
+form {
+  outline: none !important;
+  box-shadow: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+form:focus,
+form:focus-within {
+  outline: none !important;
+}
+
+/* Accessible focus ring exclusively for keyboard navigation on buttons and links */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Scrollbar configuration: eliminate horizontal scrollbars and reduce vertical size by 80% */
+html,
+body,
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+/* Eliminate horizontal scrollbars across all elements */
+::-webkit-scrollbar:horizontal {
+  display: none !important;
+  height: 0px !important;
+  width: 0px !important;
+}
+
+/* Vertical scrollbars reduced by 80% (approx 3.5px vs 17px default) */
+::-webkit-scrollbar {
+  width: 3.5px;
+  height: 0px;
+}
+
+::-webkit-scrollbar:vertical {
+  width: 3.5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--border-strong);
+  border-radius: 9999px;
+  border: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--ocean-deep);
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Utility to completely suppress scrollbars where needed */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Typography styles matching design.md with fluid responsive scaling */
+.font-display {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.font-h1 {
+  font-size: clamp(28px, 4.5vw, 48px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.font-h2 {
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.font-h3 {
+  font-size: clamp(18px, 2.8vw, 24px);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.font-h4 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.font-body {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.font-body-small {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.font-label {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.font-caption {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* Quiet luxury motion */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-fade-in {
+    animation: fadeIn 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 400ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-stagger-item {
+    animation: staggerFadeUp 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .animate-pulse-subtle {
+    animation: pulseSubtle 2s infinite ease-in-out;
+  }
+
+  /* Tactile facelift on interactive cards and containers */
+  .hover-lift {
+    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1), border-color 220ms ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-floating);
+  }
+  .hover-lift:active {
+    transform: translateY(0px) scale(0.995);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes staggerFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseSubtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   Portfolio-inspired Mobile Nav Toggle & Drawer
+   ========================================================================== */
+
+.nav-toggle-btn {
+  display: none;
+  position: relative;
+  z-index: 60;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .nav-toggle-btn {
+    display: flex;
+  }
+}
+
+.nav-toggle-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center;
+}
+
+.nav-toggle-btn span:nth-child(2) {
+  width: 14px;
+  align-self: flex-end;
+  margin-right: 10px;
+}
+
+.nav-toggle-btn:hover {
+  background: rgba(128, 128, 128, 0.08);
+}
+
+.nav-toggle-btn.is-open {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: rotate(180deg);
+}
+
+.nav-toggle-btn.is-open:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-toggle-btn.is-open span {
+  background: #ffffff;
+}
+
+.nav-toggle-btn.is-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle-btn.is-open span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.nav-toggle-btn.is-open span:nth-child(3) {
+  width: 20px;
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Portfolio Drawer Stagger Transitions */
+.portfolio-nav-item {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+}
+
+.portfolio-drawer-open .portfolio-nav-item {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.portfolio-drawer-open .portfolio-nav-item:nth-child(1) { transition-delay: 0.06s; }
+.portfolio-drawer-open .portfolio-nav-item:nth-child(2) { transition-delay: 0.11s; }
+.portfolio-drawer-open .portfolio-nav-item:nth-child(3) { transition-delay: 0.16s; }
+.portfolio-drawer-open .portfolio-nav-item:nth-child(4) { transition-delay: 0.21s; }
+.portfolio-drawer-open .portfolio-nav-item:nth-child(5) { transition-delay: 0.26s; }
+.portfolio-drawer-open .portfolio-nav-item:nth-child(6) { transition-delay: 0.31s; }
+.portfolio-drawer-open .portfolio-nav-item:nth-child(7) { transition-delay: 0.36s; }
+.portfolio-drawer-open .portfolio-nav-item:nth-child(8) { transition-delay: 0.41s; }
+
+/* Status pulse dot animation from Portfolio */
+.status-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  position: relative;
+  display: inline-block;
+}
+
+.status-pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.4);
+  animation: pulseSubtle 1.8s infinite ease-out;
+}

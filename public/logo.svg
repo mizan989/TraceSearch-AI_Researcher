@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <rect width="64" height="64" rx="16" fill="#4E635E"/>
+  <rect x="1" y="1" width="62" height="62" rx="15" stroke="#FFFFFF" stroke-opacity="0.15" stroke-width="2"/>
+  <!-- Precision Lens -->
+  <circle cx="28" cy="28" r="12" stroke="#FAFAF7" stroke-width="4" stroke-linecap="round"/>
+  <!-- Focus Point -->
+  <circle cx="28" cy="28" r="3.5" fill="#FAFAF7"/>
+  <!-- Trace Beam -->
+  <path d="M37 37L48 48" stroke="#FAFAF7" stroke-width="4.2" stroke-linecap="round"/>
+  <!-- Evidence Target Node -->
+  <circle cx="48" cy="48" r="4.5" fill="#E2E0C8"/>
+  <!-- Crosshair calibration markers -->
+  <path d="M28 8V12M8 28H12M28 44V48" stroke="#FAFAF7" stroke-width="2.8" stroke-linecap="round" stroke-opacity="0.8"/>
+</svg>
