@@ -1,6 +1,7 @@
 import { ResearchSession, ResearchStatus } from "@/types/research";
 import { planResearchQueries } from "@/lib/ai/planner";
 import { searchWebMulti } from "@/lib/search/serpapi";
+import { enrichSourcesWithContent } from "@/lib/search/scraper";
 import { synthesizeResearch } from "@/lib/ai/synthesizer";
 import { transformGeneratedFindings } from "./findings";
 import { SearchQuery } from "@/types/search";
@@ -17,7 +18,7 @@ export async function runResearchPipeline(
   const now = new Date().toISOString();
 
   // Step 1: Planning
-  onProgress?.("planning", "Understanding your question and generating research queries...", 20);
+  onProgress?.("planning", "Understanding your question and generating research queries...", 15);
   const plan = await planResearchQueries(query);
 
   const searchQueries: SearchQuery[] = plan.queries.map((q, idx) => ({
@@ -29,25 +30,26 @@ export async function runResearchPipeline(
     createdAt: now,
   }));
 
-  // Step 2: Searching
+  // Step 2: Searching live Google via SerpApi
   onProgress?.(
     "searching",
-    `Searching the web across ${plan.queries.length} focused queries...`,
-    45
+    `Searching the live web across ${plan.queries.length} focused queries...`,
+    40
   );
   const queryStrings = plan.queries.map((q) => q.query);
   const sources = await searchWebMulti(queryStrings, sessionId);
 
-  // Step 3: Analyzing
+  // Step 3: Analyzing and reading article content
   onProgress?.(
     "analyzing",
-    `Analyzing and cross-referencing ${sources.length} sources...`,
-    70
+    `Reading and cross-referencing evidence from ${sources.length} retrieved sources...`,
+    65
   );
+  const enrichedSources = await enrichSourcesWithContent(sources, 6);
 
-  // Step 4: Generating
+  // Step 4: Generating grounded findings
   onProgress?.("generating", "Synthesizing findings and establishing evidence traces...", 85);
-  const synthesis = await synthesizeResearch(query, sources);
+  const synthesis = await synthesizeResearch(query, enrichedSources);
 
   const findings = transformGeneratedFindings(synthesis.findings, sessionId);
 
@@ -64,7 +66,7 @@ export async function runResearchPipeline(
     uncertainties: synthesis.uncertainties,
     followUpQuestions: synthesis.followUpQuestions,
     findings,
-    sources,
+    sources: enrichedSources,
     searchQueries,
   };
 

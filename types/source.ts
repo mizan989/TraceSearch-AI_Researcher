@@ -15,6 +15,7 @@ export interface Source {
   url: string;
   domain: string;
   snippet: string;
+  fullContent?: string;
   sourceType: SourceType;
   retrievedAt: string;
 }

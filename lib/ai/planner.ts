@@ -12,62 +12,41 @@ export async function planResearchQueries(question: string): Promise<ResearchPla
     );
 
     const validated = ResearchPlanSchema.safeParse(raw);
-    if (validated.success) {
+    if (validated.success && validated.data.queries.length > 0) {
       return {
         originalQuery: question,
         queries: validated.data.queries,
       };
     }
 
-    console.warn("[Planner] Validation failed for AI output, falling back to heuristic plan:", validated.error);
+    console.warn("[Planner] Validation failed for AI output, using heuristic plan:", validated.error);
     return getHeuristicResearchPlan(question);
   } catch (error) {
-    console.warn("[Planner] Using fallback heuristic research planner:", error instanceof Error ? error.message : error);
+    console.warn("[Planner] Using heuristic query decomposition:", error instanceof Error ? error.message : error);
     return getHeuristicResearchPlan(question);
   }
 }
 
 /**
- * Heuristic planning when AI provider is unreachable or in demo mode.
+ * Clean heuristic decomposition based strictly on the user's actual question.
  */
 function getHeuristicResearchPlan(question: string): ResearchPlan {
   const clean = question.replace(/[?.,!]/g, "").trim();
-  const lower = clean.toLowerCase();
-
-  if (lower.includes("cyber") || lower.includes("security")) {
-    return {
-      originalQuery: question,
-      queries: [
-        {
-          query: "AI cybersecurity defense automation NIST CISA guidelines",
-          rationale: "Gather official technical guidance and government frameworks on AI defense.",
-        },
-        {
-          query: "autonomous exploit generation malware LLM breakout time report",
-          rationale: "Evaluate attacker methodologies and zero-day exploitation speed.",
-        },
-        {
-          query: "passkeys phishing deepfake authentication enterprise resilience",
-          rationale: "Investigate modern authentication standards and biometric defense resilience.",
-        },
-      ],
-    };
-  }
 
   return {
     originalQuery: question,
     queries: [
       {
-        query: `${clean} overview state and key developments`,
-        rationale: "Capture the foundational background and current status.",
+        query: `${clean} overview and key facts`,
+        rationale: "Capture the core background, definition, and foundational facts.",
       },
       {
-        query: `${clean} trends adoption analysis industry report`,
-        rationale: "Identify real-world metrics, adoption rates, and key challenges.",
+        query: `${clean} latest developments and analysis`,
+        rationale: "Discover current updates, real-world data points, and recent findings.",
       },
       {
-        query: `${clean} future outlook risks and implications`,
-        rationale: "Examine future predictions, unresolved challenges, and risk factors.",
+        query: `${clean} perspectives and implications`,
+        rationale: "Examine differing viewpoints, caveats, and future implications.",
       },
     ],
   };
