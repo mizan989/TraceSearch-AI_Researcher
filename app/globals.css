@@ -1,49 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FAFAF7;
-  --surface: #FFFFFF;
-  --surface-subtle: #F4F4EF;
-  --text-primary: #263A35;
-  --text-secondary: #66716C;
-  --text-muted: #8A938E;
-  --border: #E3E5DF;
-  --border-strong: #D2D6CF;
-  --ocean-deep: #4E635E;
-  --ocean-deep-hover: #40544F;
-  --villa-nova: #E2E0C8;
-  --siren-song: #A6B49E;
-  --big-river: #818C78;
-  --focus-ring: #4E635E;
-  --success: #4E635E;
-  --error: #B42318;
-  --warning: #8A6418;
+  --background: #D9D9D9; /* Alabaster Grey primary background */
+  --surface: #EBEBEB;
+  --surface-subtle: #E0E0E0;
+  --text-primary: #1A0706; /* Coffee Bean */
+  --text-secondary: #4A201E;
+  --text-muted: #755250;
+  --border: #C2C2C2;
+  --border-strong: #55100D; /* Black Cherry */
 
-  --shadow-subtle: 0 1px 2px rgba(20, 30, 26, 0.04);
-  --shadow-floating: 0 8px 30px rgba(20, 30, 26, 0.08);
+  --racing-red: #DD0200; /* Racing Red */
+  --racing-red-hover: #B80200;
+  --black-cherry: #55100D; /* Black Cherry */
+  --black-cherry-hover: #3D0B09;
+  --coffee-bean: #1A0706; /* Coffee Bean */
+  --alabaster-grey: #D9D9D9; /* Alabaster Grey */
+
+  /* Semantic aliases */
+  --ocean-deep: #DD0200;
+  --ocean-deep-hover: #B80200;
+  --villa-nova: #55100D;
+  --siren-song: #7A3331;
+  --big-river: #4A201E;
+  --focus-ring: #DD0200;
+  --success: #15803D;
+  --error: #DD0200;
+  --warning: #993B00;
+
+  --shadow-subtle: 0 1px 3px rgba(26, 7, 6, 0.08);
+  --shadow-floating: 0 8px 30px rgba(26, 7, 6, 0.14);
 }
 
 .dark {
-  --background: #0C100F;
-  --surface: #121715;
-  --surface-subtle: #171D1A;
-  --text-primary: #F3F5F1;
-  --text-secondary: #AAB3AD;
-  --text-muted: #747E78;
-  --border: #28302C;
-  --border-strong: #39433E;
-  --ocean-deep: #8EA8A0;
-  --ocean-deep-hover: #A7BDB5;
-  --villa-nova: #D8D5B8;
-  --siren-song: #A6B49E;
-  --big-river: #919D88;
-  --focus-ring: #8EA8A0;
-  --success: #8EA8A0;
-  --error: #F97066;
-  --warning: #D8B45B;
+  --background: #1A0706; /* Coffee Bean primary dark background */
+  --surface: #250D0C;
+  --surface-subtle: #331413;
+  --text-primary: #D9D9D9; /* Alabaster Grey */
+  --text-secondary: #BAA5A5;
+  --text-muted: #877272;
+  --border: #421615;
+  --border-strong: #55100D; /* Black Cherry */
 
-  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --shadow-floating: 0 8px 30px rgba(0, 0, 0, 0.6);
+  --racing-red: #DD0200; /* Racing Red */
+  --racing-red-hover: #FF2B28;
+  --black-cherry: #55100D; /* Black Cherry */
+  --black-cherry-hover: #6E1612;
+  --coffee-bean: #1A0706; /* Coffee Bean */
+  --alabaster-grey: #D9D9D9; /* Alabaster Grey */
+
+  /* Semantic aliases */
+  --ocean-deep: #DD0200;
+  --ocean-deep-hover: #FF2B28;
+  --villa-nova: #55100D;
+  --siren-song: #7A3331;
+  --big-river: #A89090;
+  --focus-ring: #DD0200;
+  --success: #22C55E;
+  --error: #FF4D4A;
+  --warning: #E07A2B;
+
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-floating: 0 8px 30px rgba(0, 0, 0, 0.7);
 }
 
 @theme inline {
@@ -55,6 +73,14 @@
   --color-text-muted: var(--text-muted);
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
+
+  --color-racing-red: var(--racing-red);
+  --color-racing-red-hover: var(--racing-red-hover);
+  --color-black-cherry: var(--black-cherry);
+  --color-black-cherry-hover: var(--black-cherry-hover);
+  --color-coffee-bean: var(--coffee-bean);
+  --color-alabaster-grey: var(--alabaster-grey);
+
   --color-ocean-deep: var(--ocean-deep);
   --color-ocean-deep-hover: var(--ocean-deep-hover);
   --color-villa-nova: var(--villa-nova);
@@ -411,7 +437,7 @@ body,
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #10b981;
+  background: #DD0200;
   position: relative;
   display: inline-block;
 }
@@ -421,6 +447,6 @@ body,
   position: absolute;
   inset: -3px;
   border-radius: 50%;
-  background: rgba(16, 185, 129, 0.4);
+  background: rgba(221, 2, 0, 0.4);
   animation: pulseSubtle 1.8s infinite ease-out;
 }
