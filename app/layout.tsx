@@ -11,8 +11,16 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://trace-search.vercel.app"),
   title: "TraceSearch | AI Research Engine",
   description: "Search the web, analyze multiple sources, and trace important findings back to their evidence.",
+  openGraph: {
+    title: "TraceSearch | AI Research Engine",
+    description: "Search the web, analyze multiple sources, and trace important findings back to their evidence.",
+    url: "https://trace-search.vercel.app",
+    siteName: "TraceSearch",
+    type: "website",
+  },
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { listRecentSessionsFromStorage } from "@/lib/supabase/queries";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     const sessions = await listRecentSessionsFromStorage(25);
