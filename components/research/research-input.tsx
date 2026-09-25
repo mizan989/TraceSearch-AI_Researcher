@@ -16,7 +16,7 @@ export function ResearchInput({
   initialValue = "",
   isLoading = false,
   onSubmit,
-  placeholder = "Enter your research question (e.g. How is artificial intelligence changing cybersecurity in 2026?)...",
+  placeholder = "Ask any complex research question...",
   autoFocus = false,
 }: ResearchInputProps) {
   const [query, setQuery] = useState(initialValue);

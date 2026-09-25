@@ -82,7 +82,7 @@ export default function HomePage() {
             <div className="max-w-[760px] mx-auto">
               <ResearchInput
                 onSubmit={startResearch}
-                placeholder="Ask any complex research question (e.g. How is artificial intelligence changing cybersecurity in 2026?)..."
+                placeholder="Ask any complex research question..."
                 autoFocus
               />
 

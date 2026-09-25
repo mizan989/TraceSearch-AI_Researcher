@@ -42,3 +42,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# documentation and specifications
+design.md
+rules.md
+prd.md
+ARCHITECTURE.md
+CLAUDE.md
+test-*.ts
