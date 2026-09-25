@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import { CookieBanner } from "@/components/ui/cookie-banner";
 
-const inter = Inter({
-  subsets: ["latin"],
+const inter = localFont({
+  src: "./fonts/Inter-Variable.woff2",
   variable: "--font-inter",
   display: "swap",
+  weight: "100 900",
 });
 
 export const metadata: Metadata = {
