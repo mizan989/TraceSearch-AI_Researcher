@@ -6,23 +6,40 @@ export const PlannedQuerySchema = z.object({
 });
 
 export const ResearchPlanSchema = z.object({
-  queries: z.array(PlannedQuerySchema).min(1).max(4),
+  queries: z.array(PlannedQuerySchema).min(1).max(6),
 });
 
-export const GeneratedFindingSchema = z.object({
-  title: z.string().min(3),
-  content: z.string().min(5),
-  source_ids: z.array(z.string()).default([]),
-  uncertainty: z.string().optional(),
-});
+export const GeneratedFindingSchema = z
+  .object({
+    title: z.string().optional().default("Key Finding"),
+    content: z.string().optional().default(""),
+    source_ids: z.union([z.array(z.string()), z.string().transform((s) => [s])]).optional().default([]),
+    sourceIds: z.union([z.array(z.string()), z.string().transform((s) => [s])]).optional(),
+    uncertainty: z.string().optional(),
+  })
+  .transform((val) => ({
+    title: val.title || "Key Finding",
+    content: val.content || "",
+    source_ids: val.source_ids.length > 0 ? val.source_ids : val.sourceIds || [],
+    uncertainty: val.uncertainty,
+  }));
 
-export const StructuredSynthesisSchema = z.object({
-  title: z.string().min(3),
-  summary: z.string().min(10),
-  findings: z.array(GeneratedFindingSchema).min(1),
-  uncertainties: z.array(z.string()).default([]),
-  follow_up_questions: z.array(z.string()).default([]),
-});
+export const StructuredSynthesisSchema = z
+  .object({
+    title: z.string().optional().default("Research Synthesis"),
+    summary: z.string().optional().default(""),
+    findings: z.array(GeneratedFindingSchema).optional().default([]),
+    uncertainties: z.array(z.string()).optional().default([]),
+    follow_up_questions: z.array(z.string()).optional(),
+    followUpQuestions: z.array(z.string()).optional(),
+  })
+  .transform((val) => ({
+    title: val.title || "Research Synthesis",
+    summary: val.summary || "",
+    findings: val.findings || [],
+    uncertainties: val.uncertainties || [],
+    follow_up_questions: val.follow_up_questions || val.followUpQuestions || [],
+  }));
 
 export type ValidatedResearchPlan = z.infer<typeof ResearchPlanSchema>;
 export type ValidatedSynthesisOutput = z.infer<typeof StructuredSynthesisSchema>;
