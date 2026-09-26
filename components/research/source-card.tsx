@@ -4,7 +4,7 @@ import React from "react";
 import { ExternalLink, Globe } from "lucide-react";
 import { Source } from "@/types/source";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+import { cn, isSafeExternalUrl } from "@/lib/utils";
 
 interface SourceCardProps {
   source: Source;
@@ -54,16 +54,18 @@ export function SourceCard({
           </Badge>
         </div>
 
-        <a
-          href={source.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          aria-label={`Open source: ${source.title}`}
-          className="text-text-muted hover:text-ocean-deep transition-colors p-1 rounded hover:bg-surface-subtle"
-        >
-          <ExternalLink className="w-3.5 h-3.5" />
-        </a>
+        {isSafeExternalUrl(source.url) && (
+          <a
+            href={source.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            aria-label={`Open source: ${source.title}`}
+            className="text-text-muted hover:text-ocean-deep transition-colors p-1 rounded hover:bg-surface-subtle"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+          </a>
+        )}
       </div>
 
       <h4 className="text-sm font-semibold text-text-primary group-hover:text-ocean-deep transition-colors line-clamp-2 leading-snug">

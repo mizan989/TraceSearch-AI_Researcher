@@ -82,10 +82,11 @@ export async function getSessionFromStorage(id: string): Promise<ResearchSession
   return null;
 }
 
-export async function listRecentSessionsFromStorage(limit = 20): Promise<ResearchSession[]> {
-  const sessions = Array.from(globalSessionCache.values());
-  sessions.sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
-  return sessions.slice(0, limit);
+/**
+ * Security: Cross-session history disclosure prevention.
+ * Research history is stored client-side in the user's browser (localStorage)
+ * to prevent leaking queries and findings across unauthenticated users.
+ */
+export async function listRecentSessionsFromStorage(_limit = 20): Promise<ResearchSession[]> {
+  return [];
 }

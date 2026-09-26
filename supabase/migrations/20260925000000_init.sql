@@ -46,3 +46,38 @@ CREATE TABLE IF NOT EXISTS finding_sources (
   relationship TEXT,
   PRIMARY KEY (finding_id, source_id)
 );
+
+-- Enable Row Level Security (RLS) on all tables to prevent unauthorized data tampering
+ALTER TABLE research_sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE sources ENABLE ROW LEVEL SECURITY;
+ALTER TABLE findings ENABLE ROW LEVEL SECURITY;
+ALTER TABLE finding_sources ENABLE ROW LEVEL SECURITY;
+
+-- Allow read access for public shared research reports
+CREATE POLICY "Allow public read access to sessions" ON research_sessions
+  FOR SELECT USING (true);
+
+-- Restrict full write and management access to service role only
+CREATE POLICY "Allow service role full access to sessions" ON research_sessions
+  FOR ALL TO service_role USING (true) WITH CHECK (true);
+
+-- Sources policies
+CREATE POLICY "Allow public read access to sources" ON sources
+  FOR SELECT USING (true);
+
+CREATE POLICY "Allow service role full access to sources" ON sources
+  FOR ALL TO service_role USING (true) WITH CHECK (true);
+
+-- Findings policies
+CREATE POLICY "Allow public read access to findings" ON findings
+  FOR SELECT USING (true);
+
+CREATE POLICY "Allow service role full access to findings" ON findings
+  FOR ALL TO service_role USING (true) WITH CHECK (true);
+
+-- Finding sources policies
+CREATE POLICY "Allow public read access to finding_sources" ON finding_sources
+  FOR SELECT USING (true);
+
+CREATE POLICY "Allow service role full access to finding_sources" ON finding_sources
+  FOR ALL TO service_role USING (true) WITH CHECK (true);

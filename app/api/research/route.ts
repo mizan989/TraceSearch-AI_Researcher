@@ -1,11 +1,34 @@
 import { NextRequest, NextResponse } from "next/server";
 import { ResearchRequestSchema } from "@/lib/validation/research";
 import { ResearchOrchestrator } from "@/lib/research/orchestrator";
+import { checkRateLimit } from "@/lib/security/rate-limit";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
+  // Enforce rate limiting: max 6 research requests per minute per IP
+  const rateLimit = checkRateLimit(req, 6, 60 * 1000);
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: {
+          code: "RATE_LIMITED",
+          message: `Too many research requests. Please wait ${rateLimit.resetInSeconds} seconds before starting another research session.`,
+        },
+      },
+      {
+        status: 429,
+        headers: {
+          "Retry-After": String(rateLimit.resetInSeconds),
+          "X-RateLimit-Limit": String(rateLimit.limit),
+          "X-RateLimit-Remaining": "0",
+        },
+      }
+    );
+  }
+
   try {
     const body = await req.json().catch(() => null);
     const parsed = ResearchRequestSchema.safeParse(body);

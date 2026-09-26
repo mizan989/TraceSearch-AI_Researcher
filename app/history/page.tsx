@@ -7,29 +7,31 @@ import { Footer } from "@/components/layout/footer";
 import { ResearchSession } from "@/types/research";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Clock, ArrowRight, Database, Search } from "lucide-react";
+import { Clock, ArrowRight, Database, Search, Trash2 } from "lucide-react";
 import { formatDate } from "@/lib/utils";
+import { getLocalSessions, clearLocalSessions } from "@/lib/storage/client-history";
 
 export default function HistoryPage() {
   const [sessions, setSessions] = useState<ResearchSession[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadHistory() {
-      try {
-        const res = await fetch("/api/history");
-        const json = await res.json();
-        if (json.success && Array.isArray(json.data)) {
-          setSessions(json.data);
-        }
-      } catch (err) {
-        console.error("Failed to load history:", err);
-      } finally {
-        setLoading(false);
-      }
+    try {
+      const localData = getLocalSessions();
+      setSessions(localData);
+    } catch (err) {
+      console.error("Failed to load local history:", err);
+    } finally {
+      setLoading(false);
     }
-    loadHistory();
   }, []);
+
+  const handleClearHistory = () => {
+    if (typeof window !== "undefined" && window.confirm("Are you sure you want to clear your local research history?")) {
+      clearLocalSessions();
+      setSessions([]);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-text-primary">
@@ -47,12 +49,26 @@ export default function HistoryPage() {
             </h1>
           </div>
 
-          <Link href="/">
-            <Button variant="primary" size="sm" className="gap-1.5 w-full sm:w-auto">
-              <Search className="w-3.5 h-3.5" />
-              <span>New Research</span>
-            </Button>
-          </Link>
+          <div className="flex items-center gap-2.5 w-full sm:w-auto">
+            {sessions.length > 0 && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleClearHistory}
+                className="gap-1.5 text-xs text-text-secondary hover:text-red-500 hover:border-red-200"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>Clear History</span>
+              </Button>
+            )}
+
+            <Link href="/">
+              <Button variant="primary" size="sm" className="gap-1.5 w-full sm:w-auto">
+                <Search className="w-3.5 h-3.5" />
+                <span>New Research</span>
+              </Button>
+            </Link>
+          </div>
         </div>
 
         {loading ? (

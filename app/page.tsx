@@ -11,6 +11,7 @@ import { ResearchView } from "@/components/research/research-view";
 import { ResearchSession, ResearchStatus } from "@/types/research";
 import { AlertCircle, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { saveLocalSession } from "@/lib/storage/client-history";
 
 export default function HomePage() {
   const [currentQuery, setCurrentQuery] = useState("");
@@ -58,6 +59,7 @@ export default function HomePage() {
       }
 
       setSession(json.data);
+      saveLocalSession(json.data);
       setStatus("completed");
     } catch (err) {
       clearTimeout(t1);

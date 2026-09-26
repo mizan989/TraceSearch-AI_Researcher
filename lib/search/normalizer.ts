@@ -1,5 +1,5 @@
 import { Source, SourceType } from "@/types/source";
-import { extractDomain } from "@/lib/utils";
+import { extractDomain, isSafeExternalUrl } from "@/lib/utils";
 
 export function categorizeSource(url: string, domain: string, title: string): SourceType {
   const d = domain.toLowerCase();
@@ -48,7 +48,7 @@ export function normalizeSerpApiResult(
   const url = result.link?.trim();
   const title = result.title?.trim();
 
-  if (!url || !title) {
+  if (!url || !title || !isSafeExternalUrl(url)) {
     return null;
   }
 

@@ -31,3 +31,9 @@ export function extractDomain(url: string): string {
     return url;
   }
 }
+
+export function isSafeExternalUrl(url?: string | null): boolean {
+  if (!url || typeof url !== "string") return false;
+  const trimmed = url.trim().toLowerCase();
+  return trimmed.startsWith("https://") || trimmed.startsWith("http://");
+}

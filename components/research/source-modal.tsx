@@ -5,7 +5,7 @@ import { Source } from "@/types/source";
 import { X, ExternalLink, Globe, Calendar, ShieldCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatDate } from "@/lib/utils";
+import { formatDate, isSafeExternalUrl } from "@/lib/utils";
 
 interface SourceModalProps {
   source: Source | null;
@@ -87,15 +87,17 @@ export function SourceModal({ source, onClose }: SourceModalProps) {
             <Button variant="outline" size="sm" onClick={onClose}>
               Done
             </Button>
-            <a
-              href={source.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1.5 h-8 px-3 text-xs font-medium rounded-sm bg-ocean-deep text-white hover:bg-ocean-deep-hover transition-colors shadow-subtle shrink-0 outline-none"
-            >
-              <span>Visit Origin</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+            {isSafeExternalUrl(source.url) && (
+              <a
+                href={source.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-1.5 h-8 px-3 text-xs font-medium rounded-sm bg-ocean-deep text-white hover:bg-ocean-deep-hover transition-colors shadow-subtle shrink-0 outline-none"
+              >
+                <span>Visit Origin</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
           </div>
         </div>
       </div>
