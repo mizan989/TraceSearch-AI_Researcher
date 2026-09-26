@@ -32,12 +32,16 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     console.error("[API/Research] Unexpected error:", error);
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : "Failed to execute research. Please try again with a revised question.";
     return NextResponse.json(
       {
         success: false,
         error: {
           code: "INTERNAL_ERROR",
-          message: "Failed to execute research. Please try again with a revised question.",
+          message: errorMessage,
         },
       },
       { status: 500 }
