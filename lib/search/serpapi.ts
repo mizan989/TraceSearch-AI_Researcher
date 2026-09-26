@@ -35,7 +35,7 @@ export async function executeSingleSearch(
   url.searchParams.set("engine", "google");
   url.searchParams.set("q", query);
   url.searchParams.set("api_key", apiKey);
-  url.searchParams.set("num", "10");
+  url.searchParams.set("num", "6");
 
   let attempts = 0;
   const maxAttempts = 2;

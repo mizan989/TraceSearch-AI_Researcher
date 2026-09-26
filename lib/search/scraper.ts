@@ -76,8 +76,8 @@ async function scrapeSingleSource(source: Source): Promise<Source> {
         Accept:
           "text/html,application/xhtml+xml,application/xml;q=0.9,text/plain;q=0.8,*/*;q=0.7",
       },
-      // Strict 4.5s timeout per source to keep the pipeline responsive
-      signal: AbortSignal.timeout(4500),
+      // Strict 2s timeout per source to keep the pipeline responsive and within server limits
+      signal: AbortSignal.timeout(2000),
     });
 
     if (!res.ok) {
@@ -111,7 +111,7 @@ async function scrapeSingleSource(source: Source): Promise<Source> {
  */
 export async function enrichSourcesWithContent(
   sources: Source[],
-  maxToScrape = 6
+  maxToScrape = 3
 ): Promise<Source[]> {
   if (sources.length === 0) return [];
 

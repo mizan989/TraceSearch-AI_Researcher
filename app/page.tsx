@@ -42,6 +42,15 @@ export default function HomePage() {
       clearTimeout(t2);
       clearTimeout(t3);
 
+      const contentType = res.headers.get("content-type") || "";
+      if (!contentType.includes("application/json")) {
+        const rawText = await res.text().catch(() => "");
+        if (res.status === 504 || rawText.includes("TIMEOUT")) {
+          throw new Error("The research query timed out on the server. Please try a more specific question or try again.");
+        }
+        throw new Error(`Server returned an error (${res.status}). Please try again.`);
+      }
+
       const json = await res.json();
 
       if (!res.ok || !json.success) {
