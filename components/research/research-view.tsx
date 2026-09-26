@@ -11,8 +11,9 @@ import { FollowUpSection } from "./follow-up-section";
 import { SourceModal } from "./source-modal";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Share2, Copy, Check, Calendar, Search } from "lucide-react";
+import { Share2, Copy, Check, Calendar, Search, Download } from "lucide-react";
 import { formatDate } from "@/lib/utils";
+import { exportResearchAsPDF } from "@/lib/export/pdf";
 
 interface ResearchViewProps {
   session: ResearchSession;
@@ -24,6 +25,7 @@ export function ResearchView({ session, onNewSearch }: ResearchViewProps) {
   const [selectedSourceForModal, setSelectedSourceForModal] = useState<Source | null>(null);
   const [copied, setCopied] = useState(false);
   const [shared, setShared] = useState(false);
+  const [exporting, setExporting] = useState(false);
 
   const handleCitationClick = (sourceId: string) => {
     setActiveSourceId(sourceId);
@@ -67,6 +69,17 @@ export function ResearchView({ session, onNewSearch }: ResearchViewProps) {
     }
   };
 
+  const handleExportPDF = () => {
+    try {
+      setExporting(true);
+      exportResearchAsPDF(session);
+    } catch (err) {
+      console.error("PDF export failed:", err);
+    } finally {
+      setTimeout(() => setExporting(false), 1200);
+    }
+  };
+
   return (
     <div className="w-full space-y-10 animate-fade-in pb-16">
       {/* Session Title and Summary Header */}
@@ -81,6 +94,26 @@ export function ResearchView({ session, onNewSearch }: ResearchViewProps) {
           </div>
 
           <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleExportPDF}
+              disabled={exporting}
+              className="gap-1.5 flex-1 sm:flex-initial"
+            >
+              {exporting ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-ocean-deep" />
+                  <span>Exported</span>
+                </>
+              ) : (
+                <>
+                  <Download className="w-3.5 h-3.5" />
+                  <span>Export PDF</span>
+                </>
+              )}
+            </Button>
+
             <Button
               variant="outline"
               size="sm"
