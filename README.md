@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/mizan989/TraceSearch-AI_Researcher">
-    <img src="https://raw.githubusercontent.com/mizan989/TraceSearch-AI_Researcher/main/public/logo.svg" alt="TraceSearch Banner" width="100" height="100">
+    <img src="https://raw.githubusercontent.com/mizan989/TraceSearch-AI_Researcher/main/public/logo.png" alt="TraceSearch Banner" width="100" height="100">
   </a>
 </p>
 
