@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { ThemeProvider } from "@/components/layout/theme-provider";
 import { CookieBanner } from "@/components/ui/cookie-banner";
 
 const inter = localFont({
@@ -36,12 +35,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className={`${inter.className} min-h-full flex flex-col bg-background text-text-primary`}>
-        <ThemeProvider>
-          {children}
-          <CookieBanner />
-        </ThemeProvider>
+        {children}
+        <CookieBanner />
       </body>
     </html>
   );

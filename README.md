@@ -43,7 +43,7 @@ TraceSearch is an autonomous AI web research and evidence-tracing engine designe
 - **Interactive Evidence Trace Map** — Visual dependency graph mapping the lineage between synthesized findings and supporting evidence
 - **Uncertainty & Divergence Detection** — Proactively highlights data gaps, conflicting estimates, differing viewpoints, or incomplete coverage
 - **Source Inspection & Deep Filtering** — Filter sources by domain category (Academic, Official, Technical, News) with live snippet preview
-- **Quiet Luxury Apple Editorial UX** — Restrained typography (Inter), ocean slate palette (`#4E635E`), subtle glass surfaces, and manual dark mode toggle
+- **Quiet Luxury Apple Editorial UX** — Restrained typography (Inter), Alabaster Grey (`#D9D9D9`) and Coffee Bean (`#1A0706`) palette paired with Racing Red (`#DD0200`) accents, subtle glass surfaces, and clean light interface
 
 <br>
 
@@ -191,7 +191,7 @@ When sources disagree or information is incomplete, TraceSearch refuses to inven
 
 ### Apple Editorial Linear Aesthetics
 
-- **Color System** — Restrained warm neutrals (`#FAFAF7` light, `#0C100F` dark) paired with ocean slate accents (`#4E635E`).
+- **Color System** — Restrained neutrals (Alabaster Grey `#D9D9D9` background, Coffee Bean `#1A0706` typography) paired with Racing Red (`#DD0200`) and Black Cherry (`#55100D`) accents.
 - **Typography** — Crisp Inter typography with high typographic hierarchy and generous spacing.
 - **Motion & Micro-interactions** — Smooth cubic-bezier transitions, glassmorphic card borders, and responsive split drawers.
 
@@ -278,13 +278,13 @@ trace-search/
 │   ├── api/
 │   │   ├── research/route.ts  # Thin API controller for research execution
 │   │   └── history/route.ts   # Session history API
-│   ├── layout.tsx             # Root layout with Inter font and theme provider
+│   ├── layout.tsx             # Root layout with Inter font and global metadata
 │   └── globals.css            # Design tokens and quiet luxury styles
 │
 ├── components/
 │   ├── landing/               # Hero, Features, DemoQueries
 │   ├── research/              # ResearchInput, Progress, FindingCard, EvidenceMap, Sidebar
-│   ├── layout/                # Navbar, Footer, ThemeToggle, ThemeProvider
+│   ├── layout/                # Navbar, Footer
 │   └── ui/                    # Button, Badge, Modal primitives
 │
 ├── lib/

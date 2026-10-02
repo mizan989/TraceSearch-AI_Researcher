@@ -70,7 +70,7 @@ export function CookieBanner() {
         </div>
 
         <p className="text-xs text-text-secondary leading-relaxed">
-          We use local storage and essential cookies to preserve your theme preferences and recent research sessions. We never use advertising or third-party tracking cookies.{" "}
+          We use local storage and essential cookies to preserve your interface preferences and recent research sessions. We never use advertising or third-party tracking cookies.{" "}
           <Link
             href="/cookies"
             className="text-ocean-deep hover:underline font-medium inline-flex items-center gap-0.5"

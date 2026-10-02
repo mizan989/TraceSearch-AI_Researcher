@@ -5,7 +5,6 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Search, Clock, Shield, FileText, Globe, Mail, Cookie } from "lucide-react";
-import { ThemeToggle } from "./theme-toggle";
 import { Logo } from "@/components/ui/logo";
 import { GithubIcon, LinkedinIcon, InstagramIcon } from "./social-icons";
 import { cn } from "@/lib/utils";
@@ -154,10 +153,7 @@ export function Navbar() {
               })}
             </nav>
 
-            <div className="h-4 w-[1px] bg-border mx-1 hidden md:block" />
 
-            {/* Theme Toggle */}
-            <ThemeToggle />
 
             {/* Mobile Menu Toggle Button (Strictly hidden on desktop, hides when modal is open) */}
             <button
@@ -181,20 +177,20 @@ export function Navbar() {
       {/* Full-Screen Mobile Navigation Overlay (Rendered directly into document.body to avoid parent backdrop-filter traps) */}
       {mounted && isOpen && createPortal(
         <div
-          className="fixed inset-0 z-[100] w-screen h-screen h-[100dvh] bg-[#1A0706] text-[#D9D9D9] flex flex-col justify-between overflow-hidden touch-none overscroll-none animate-fade-in select-none"
+          className="fixed inset-0 z-[100] w-screen h-screen h-[100dvh] bg-surface text-text-primary flex flex-col justify-between overflow-hidden touch-none overscroll-none animate-fade-in select-none"
           role="dialog"
           aria-modal="true"
           aria-label="Mobile Navigation Menu"
         >
           {/* Top Bar (Exact same height and padding as header so close button lands in exact spot) */}
-          <div className="max-w-[1200px] w-full mx-auto px-4 sm:px-8 h-16 flex items-center justify-between border-b border-[#55100D]/60 shrink-0">
+          <div className="max-w-[1200px] w-full mx-auto px-4 sm:px-8 h-16 flex items-center justify-between border-b border-border shrink-0">
             <Link
               href="/"
               onClick={() => setIsOpen(false)}
-              className="flex items-center gap-2.5 text-[#D9D9D9]"
+              className="flex items-center gap-2.5 text-text-primary"
             >
               <Logo size={28} />
-              <span className="font-semibold text-base tracking-tight font-sans text-[#D9D9D9]">
+              <span className="font-semibold text-base tracking-tight font-sans text-text-primary">
                 TraceSearch
               </span>
             </Link>
@@ -227,22 +223,22 @@ export function Navbar() {
                   href={item.href}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    "group flex items-center justify-between py-3.5 border-b border-[#55100D]/40 text-xl font-medium tracking-tight font-sans transition-colors",
+                    "group flex items-center justify-between py-3.5 border-b border-border text-xl font-medium tracking-tight font-sans transition-colors",
                     isActive
-                      ? "text-[#DD0200] font-semibold"
-                      : "text-[#D9D9D9]/80 hover:text-[#D9D9D9]"
+                      ? "text-racing-red font-semibold"
+                      : "text-text-secondary hover:text-text-primary"
                   )}
                 >
                   <div className="flex items-center gap-3">
                     <Icon className={cn(
                       "w-5 h-5 transition-colors",
-                      isActive ? "text-[#DD0200]" : "text-[#D9D9D9]/50 group-hover:text-[#D9D9D9]"
+                      isActive ? "text-racing-red" : "text-text-muted group-hover:text-text-primary"
                     )} />
                     <span>{item.label}</span>
                   </div>
                   <span className={cn(
                     "transition-all text-base",
-                    isActive ? "text-[#DD0200]" : "text-[#D9D9D9]/30 group-hover:text-[#D9D9D9] group-hover:translate-x-1.5"
+                    isActive ? "text-racing-red" : "text-text-muted group-hover:text-text-primary group-hover:translate-x-1.5"
                   )}>
                     &rarr;
                   </span>
@@ -252,7 +248,7 @@ export function Navbar() {
           </div>
 
           {/* Bottom Section: Social Profile Pills & Clean Footer */}
-          <div className="max-w-[1200px] w-full mx-auto px-6 sm:px-8 pt-4 pb-8 border-t border-[#55100D]/60 space-y-4 shrink-0">
+          <div className="max-w-[1200px] w-full mx-auto px-6 sm:px-8 pt-4 pb-8 border-t border-border space-y-4 shrink-0">
             <div className="flex flex-wrap gap-2">
               {socialLinks.map((link) => {
                 const Icon = link.icon;
@@ -263,17 +259,17 @@ export function Navbar() {
                     target={link.href.startsWith("mailto:") ? undefined : "_blank"}
                     rel={link.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
                     onClick={() => setIsOpen(false)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#55100D]/30 hover:bg-[#55100D]/60 border border-[#55100D]/60 hover:border-[#DD0200]/40 text-xs font-medium text-[#D9D9D9]/90 hover:text-[#D9D9D9] transition-all active:scale-95"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-subtle hover:bg-background border border-border hover:border-racing-red text-xs font-medium text-text-secondary hover:text-text-primary transition-all active:scale-95"
                   >
-                    <Icon className="w-3.5 h-3.5 text-[#D9D9D9]/70" />
+                    <Icon className="w-3.5 h-3.5 text-text-muted" />
                     <span>{link.label}</span>
-                    <span className="text-[10px] text-[#D9D9D9]/40">&#8599;</span>
+                    <span className="text-[10px] text-text-muted">&#8599;</span>
                   </a>
                 );
               })}
             </div>
 
-            <div className="text-[11px] text-[#D9D9D9]/50 text-center font-sans">
+            <div className="text-[11px] text-text-muted text-center font-sans">
               &copy; 2026 Md Mizan · Kolkata, IN
             </div>
           </div>

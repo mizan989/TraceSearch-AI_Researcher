@@ -59,7 +59,7 @@ export default function CookiesPage() {
                   Preferences
                 </span>
                 <p className="text-xs text-text-secondary leading-normal">
-                  Saves your chosen visual theme (Light or Dark mode) so your selection persists across page visits.
+                  Saves your client research preferences and UI settings so your configuration persists across page visits.
                 </p>
               </div>
 
@@ -95,7 +95,7 @@ export default function CookiesPage() {
           <section className="space-y-3">
             <h2 className="font-h3 text-text-primary">4. Controlling Your Preferences</h2>
             <p className="font-body text-sm sm:text-base text-text-secondary leading-relaxed">
-              You can control or clear cookies and local storage directly through your browser settings. Most modern web browsers allow you to view stored cookies, delete them selectively, or block storage entirely. Disabling local storage may reset your theme preference and clear locally cached search history.
+              You can control or clear cookies and local storage directly through your browser settings. Most modern web browsers allow you to view stored cookies, delete them selectively, or block storage entirely. Disabling local storage may reset your preferences and clear locally cached search history.
             </p>
           </section>
 

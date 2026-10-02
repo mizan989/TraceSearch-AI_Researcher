@@ -32,37 +32,6 @@
   --shadow-floating: 0 8px 30px rgba(26, 7, 6, 0.14);
 }
 
-.dark {
-  --background: #1A0706; /* Coffee Bean primary dark background */
-  --surface: #250D0C;
-  --surface-subtle: #331413;
-  --text-primary: #D9D9D9; /* Alabaster Grey */
-  --text-secondary: #BAA5A5;
-  --text-muted: #877272;
-  --border: #421615;
-  --border-strong: #55100D; /* Black Cherry */
-
-  --racing-red: #DD0200; /* Racing Red */
-  --racing-red-hover: #FF2B28;
-  --black-cherry: #55100D; /* Black Cherry */
-  --black-cherry-hover: #6E1612;
-  --coffee-bean: #1A0706; /* Coffee Bean */
-  --alabaster-grey: #D9D9D9; /* Alabaster Grey */
-
-  /* Semantic aliases */
-  --ocean-deep: #DD0200;
-  --ocean-deep-hover: #FF2B28;
-  --villa-nova: #55100D;
-  --siren-song: #7A3331;
-  --big-river: #A89090;
-  --focus-ring: #DD0200;
-  --success: #22C55E;
-  --error: #FF4D4A;
-  --warning: #E07A2B;
-
-  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.5);
-  --shadow-floating: 0 8px 30px rgba(0, 0, 0, 0.7);
-}
 
 @theme inline {
   --color-background: var(--background);
@@ -383,18 +352,18 @@ body,
 }
 
 .nav-toggle-btn.is-open {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: var(--surface-subtle);
+  border-color: var(--border);
   transform: rotate(180deg);
 }
 
 .nav-toggle-btn.is-open:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: var(--surface);
+  border-color: var(--border-strong);
 }
 
 .nav-toggle-btn.is-open span {
-  background: #ffffff;
+  background: var(--text-primary);
 }
 
 .nav-toggle-btn.is-open span:nth-child(1) {

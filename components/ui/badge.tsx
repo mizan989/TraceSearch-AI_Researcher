@@ -15,9 +15,9 @@ export function Badge({
     neutral:
       "bg-surface-subtle text-text-secondary border border-border",
     ocean:
-      "bg-ocean-deep/10 text-ocean-deep border border-ocean-deep/20 dark:bg-ocean-deep/20 dark:text-ocean-deep",
+      "bg-ocean-deep/10 text-ocean-deep border border-ocean-deep/20",
     accent:
-      "bg-villa-nova/30 text-text-primary border border-siren-song/40 dark:bg-villa-nova/10",
+      "bg-villa-nova/30 text-text-primary border border-siren-song/40",
     warning:
       "bg-warning/10 text-warning border border-warning/20",
     error:

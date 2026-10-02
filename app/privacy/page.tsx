@@ -97,9 +97,9 @@ export default function PrivacyPage() {
           </section>
 
           <section className="space-y-3">
-            <h2 className="font-h3 text-text-primary">5. Cookies and Local Preferences</h2>
+            <h2 className="font-h3 text-text-primary">5. Cookies and Local Storage</h2>
             <p className="font-body text-sm sm:text-base text-text-secondary leading-relaxed">
-              We utilize browser local storage solely to retain your appearance preferences (light or dark mode) and temporary session state. We do not use third-party tracking pixels or commercial ad retargeting cookies.
+              We utilize browser local storage solely to retain your cookie preferences and temporary session research state. We do not use third-party tracking pixels or commercial ad retargeting cookies.
             </p>
           </section>
 
