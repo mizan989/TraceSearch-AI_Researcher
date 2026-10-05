@@ -184,16 +184,23 @@ export function Navbar() {
         >
           {/* Top Bar (Exact same height and padding as header so close button lands in exact spot) */}
           <div className="max-w-[1200px] w-full mx-auto px-4 sm:px-8 h-16 flex items-center justify-between border-b border-border shrink-0">
-            <Link
-              href="/"
-              onClick={() => setIsOpen(false)}
-              className="flex items-center gap-2.5 text-text-primary"
-            >
-              <Logo size={28} />
-              <span className="font-semibold text-base tracking-tight font-sans text-text-primary">
-                TraceSearch
-              </span>
-            </Link>
+            <div className="flex items-center gap-4 sm:gap-6 min-w-0">
+              <Link
+                href="/"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-2.5 text-text-primary hover:opacity-90 transition-opacity min-w-0"
+              >
+                <Logo size={32} className="shadow-subtle" />
+                <div className="flex flex-col min-w-0">
+                  <span className="font-semibold text-base tracking-tight leading-none truncate">
+                    TraceSearch
+                  </span>
+                  <span className="text-[11px] text-text-muted font-medium mt-0.5 tracking-normal hidden sm:block">
+                    Search · Analyze · Trace
+                  </span>
+                </div>
+              </Link>
+            </div>
 
             {/* Exactly ONE Close Button */}
             <button
