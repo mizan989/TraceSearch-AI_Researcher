@@ -68,9 +68,12 @@ TraceSearch is an autonomous AI web research and evidence-tracing engine designe
 ## Use Cases
 
 - **Market & Competitive Intelligence** — Gather real-time market data, vendor benchmarks, and cite primary business disclosures
+- **Knowledge & Public Interest** — Investigate public policy, government information, scientific developments, environmental issues, civic questions, and claims of public interest while tracing findings back to authoritative sources
+- **Open Innovation** — Discover emerging technologies, open-source projects, research, technical alternatives, and new approaches by connecting claims to primary repositories, documentation, papers, and other evidence
 - **Academic & Scientific Investigation** — Synthesize literature across multiple papers and trace specific claims back to primary studies
 - **Fact-Checking & Claims Validation** — Dissect viral rumors or breaking news stories with bidirectional claim-to-source mapping
 - **Technical & Security Research** — Investigate CVE disclosures, architectural tradeoffs, and emerging software paradigms
+- **Travel & Local Discovery** — Research destinations, cultural preservation, regional infrastructure, and verified local experiences
 - **Executive Briefings & Dossiers** — Generate clean, citation-anchored markdown reports with shareable permalinks
 
 ---
@@ -220,7 +223,31 @@ Outcome:
 - Interactive trace map connecting phase 2 trial endpoints to primary publications
 ```
 
-### 3. Flagship Demo Scenario
+### 3. Knowledge & Public Interest Research
+
+```text
+Query: "What changed in India's latest data protection rules?"
+Outcome:
+- Official regulatory sources identified (.gov / official notifications)
+- Government gazette documentation prioritized
+- Independent legal and academic analysis used for context
+- Key claims linked directly to statutory provisions
+- Conflicting interpretations and implementation timelines surfaced where relevant
+```
+
+### 4. Open Innovation & Technology Discovery
+
+```text
+Query: "What are the most promising open-source LLM inference frameworks in 2026?"
+Outcome:
+- Primary project repositories identified (vLLM, SGLang, TensorRT-LLM)
+- Official documentation and architecture guides inspected
+- Empirical performance comparisons and throughput benchmarks cross-referenced
+- Hardware compatibility matrices and quantization constraints surfaced
+- Practical tradeoffs and community maturity analyzed
+```
+
+### 5. Flagship Demo Scenario
 
 To experience TraceSearch end-to-end:
 

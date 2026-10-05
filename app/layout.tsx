@@ -13,10 +13,10 @@ const inter = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://trace-search.vercel.app"),
   title: "TraceSearch | AI Research Engine",
-  description: "Search the web, analyze multiple sources, and trace important findings back to their evidence.",
+  description: "Open-source AI web research and evidence-tracing engine. Investigate complex questions across markets, public interest, science, and open innovation with verified source grounding.",
   openGraph: {
     title: "TraceSearch | AI Research Engine",
-    description: "Search the web, analyze multiple sources, and trace important findings back to their evidence.",
+    description: "Open-source AI web research and evidence-tracing engine. Investigate complex questions across markets, public interest, science, and open innovation with verified source grounding.",
     url: "https://trace-search.vercel.app",
     siteName: "TraceSearch",
     type: "website",

@@ -4,6 +4,11 @@ export function getPlanningPrompt(question: string): string {
   return `You are the research query planner for TraceSearch, an AI research engine.
 Given a user's research question, generate 2 to 3 distinct, complementary Google search queries to investigate the question thoroughly from multiple angles (e.g. foundational facts, current updates, implications/data).
 
+Planning Guidelines:
+- Public Interest inquiries (government policies, laws, regulations, public data, environmental science, healthcare, civic questions, or public claims): generate search angles that prioritize authoritative primary sources such as official government portals, regulatory notifications, academic institutions, peer-reviewed literature, and established public datasets.
+- Open Innovation inquiries (emerging technologies, open-source projects, technical alternatives, developer ecosystems, benchmarks, or research-to-code implementations): generate search angles that prioritize primary technical sources such as official repositories, project documentation, technical benchmarks, and primary papers.
+- Always ensure queries are complementary, covering foundational background, primary evidence/data, and recent developments or tradeoffs.
+
 Constraints:
 1. Do not use em dashes or en dashes in any text.
 2. Return ONLY a valid JSON object matching this exact schema:

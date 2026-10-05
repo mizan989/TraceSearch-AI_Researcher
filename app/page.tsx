@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { Hero } from "@/components/landing/hero";
 import { DemoQueries } from "@/components/landing/demo-queries";
-import { ResearchInput } from "@/components/research/research-input";
+import { UseCases } from "@/components/landing/use-cases";
+import { ResearchInput, ResearchInputHandle } from "@/components/research/research-input";
 import { ResearchProgress } from "@/components/research/research-progress";
 import { ResearchView } from "@/components/research/research-view";
 import { ResearchSession, ResearchStatus } from "@/types/research";
@@ -18,6 +19,19 @@ export default function HomePage() {
   const [status, setStatus] = useState<ResearchStatus>("idle");
   const [session, setSession] = useState<ResearchSession | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const inputRef = useRef<ResearchInputHandle>(null);
+
+  const handleSelectQuery = (query: string) => {
+    setCurrentQuery(query);
+    if (inputRef.current) {
+      inputRef.current.setValue(query);
+      inputRef.current.focus();
+    }
+    const container = document.getElementById("research-input-container");
+    if (container) {
+      container.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
 
   const startResearch = async (query: string) => {
     setCurrentQuery(query);
@@ -90,14 +104,19 @@ export default function HomePage() {
           <div className="space-y-8 animate-fade-in">
             <Hero />
 
-            <div className="max-w-[760px] mx-auto">
+            <div id="research-input-container" className="max-w-[760px] mx-auto">
               <ResearchInput
+                ref={inputRef}
+                value={currentQuery}
+                onChange={setCurrentQuery}
                 onSubmit={startResearch}
                 placeholder="Ask any complex research question..."
                 autoFocus
               />
 
-              <DemoQueries onSelectQuery={startResearch} />
+              <DemoQueries onSelectQuery={handleSelectQuery} />
+
+              <UseCases onSelectQuery={handleSelectQuery} />
             </div>
           </div>
         )}

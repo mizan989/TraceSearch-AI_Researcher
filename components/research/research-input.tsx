@@ -1,38 +1,88 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from "react";
 import { ArrowRight, Sparkles, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+export interface ResearchInputHandle {
+  focus: () => void;
+  setValue: (val: string) => void;
+}
+
 interface ResearchInputProps {
   initialValue?: string;
+  value?: string;
+  onChange?: (val: string) => void;
   isLoading?: boolean;
   onSubmit: (query: string) => void;
   placeholder?: string;
   autoFocus?: boolean;
 }
 
-export function ResearchInput({
-  initialValue = "",
-  isLoading = false,
-  onSubmit,
-  placeholder = "Ask any complex research question...",
-  autoFocus = false,
-}: ResearchInputProps) {
-  const [query, setQuery] = useState(initialValue);
+export const ResearchInput = forwardRef<ResearchInputHandle, ResearchInputProps>(
+  function ResearchInput(
+    {
+      initialValue = "",
+      value: controlledValue,
+      onChange: onControlledChange,
+      isLoading = false,
+      onSubmit,
+      placeholder = "Ask any complex research question...",
+      autoFocus = false,
+    },
+    ref
+  ) {
+    const isControlled = controlledValue !== undefined;
+    const [internalQuery, setInternalQuery] = useState(initialValue);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!query.trim() || isLoading) return;
-    onSubmit(query.trim());
-  };
+    const query = isControlled ? controlledValue : internalQuery;
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+    useEffect(() => {
+      if (!isControlled && initialValue !== undefined) {
+        setInternalQuery(initialValue);
+      }
+    }, [initialValue, isControlled]);
+
+    useImperativeHandle(ref, () => ({
+      focus: () => {
+        if (textareaRef.current) {
+          textareaRef.current.focus();
+          const length = textareaRef.current.value.length;
+          textareaRef.current.setSelectionRange(length, length);
+        }
+      },
+      setValue: (val: string) => {
+        if (isControlled) {
+          onControlledChange?.(val);
+        } else {
+          setInternalQuery(val);
+        }
+      },
+    }));
+
+    const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      const next = e.target.value;
+      if (isControlled) {
+        onControlledChange?.(next);
+      } else {
+        setInternalQuery(next);
+      }
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      handleSubmit(e);
-    }
-  };
+      if (!query.trim() || isLoading) return;
+      onSubmit(query.trim());
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        handleSubmit(e);
+      }
+    };
+
 
   return (
     <form
@@ -42,8 +92,9 @@ export function ResearchInput({
       <div className="flex items-start gap-2.5 sm:gap-3">
         <Sparkles className="w-5 h-5 text-ocean-deep shrink-0 mt-1 opacity-80" />
         <textarea
+          ref={textareaRef}
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={handleTextChange}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           rows={2}
@@ -84,4 +135,4 @@ export function ResearchInput({
       </div>
     </form>
   );
-}
+});
